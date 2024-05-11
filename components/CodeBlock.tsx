@@ -1,0 +1,14 @@
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+interface Props {
+  codeString: string;
+  language?: string;
+}
+export const CodeBlock = ({ codeString, language }: Props) => {
+  return (
+    <SyntaxHighlighter style={dracula} language={language}>
+      {codeString}
+    </SyntaxHighlighter>
+  );
+};

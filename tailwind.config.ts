@@ -21,6 +21,8 @@ const config = {
     extend: {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
+        Satoshi: ["Satoshi", "sans-serif"],
+        Monument: ["Monument", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",

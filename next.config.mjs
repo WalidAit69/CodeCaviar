@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images:{
-        remotePatterns:[
+    images: {
+        remotePatterns: [
             {
-                hostname:process.env.GOOGLE_IMAGE_SRC
+                hostname: process.env.GOOGLE_IMAGE_SRC
             }
         ]
     }
