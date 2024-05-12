@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { postSchema, postValues } from "@/lib/validation";
-import { useToast } from "./ui/use-toast";
+import { useToast } from "../../ui/use-toast";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -15,16 +15,17 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { CodeBlock } from "./CodeBlock";
+import { CodeBlock } from "../../CodeBlock";
 import { Textarea } from "@/components/ui/textarea";
 import TagsInput from "react-tagsinput";
 import "react-tagsinput/react-tagsinput.css";
-import { AddPost } from "@/app/admin/posts/actions";
-import { Label } from "./ui/label";
+import { AddPost, UpdatePost } from "@/app/admin/posts/actions";
+import { Label } from "../../ui/label";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
+import Image from "next/image";
 
-function PostForm() {
+function PostForm({ post }: { post?: postValues | null }) {
   const { toast } = useToast();
   const [file, setfile] = useState<File | null>(null);
   const [loading, setloading] = useState(false);
@@ -32,10 +33,11 @@ function PostForm() {
   const form = useForm<postValues>({
     resolver: zodResolver(postSchema),
     defaultValues: {
-      title: "",
-      description: "",
-      codeblock: [{ content: "", language: "" }],
-      tech: [],
+      title: post?.title,
+      description: post?.description,
+      slug: post?.slug,
+      codeblock: post?.codeblock || [{ content: "", language: "" }],
+      tech: post?.tech || [],
     },
   });
 
@@ -56,9 +58,18 @@ function PostForm() {
 
     try {
       setloading(true);
-      await AddPost(data, formData);
-      toast({ description: "Post added." });
-    } catch (error) {
+      if (post && post.id) {
+        await UpdatePost(post.id, data, formData);
+        toast({ description: "Post Updated." });
+      } else {
+        await AddPost(data, formData);
+        toast({ description: "Post added." });
+      }
+    } catch (error: any) {
+      toast({
+        variant: "destructive",
+        description: `${error.message}`,
+      });
     } finally {
       setloading(false);
     }
@@ -71,7 +82,26 @@ function PostForm() {
 
   return (
     <>
-      <div>
+      <div className="w-full">
+        {file && (
+          <Image
+            className="flex self-center mx-auto w-[40%] object-cover rounded-lg"
+            width={400}
+            height={100}
+            src={URL.createObjectURL(file)}
+            alt="post"
+          />
+        )}
+        {!file && post?.image && (
+          <Image
+            className="flex self-center mx-auto w-[40%] object-cover rounded-lg"
+            width={400}
+            height={100}
+            src={post?.image}
+            alt="post"
+          />
+        )}
+
         <Label>Imgae</Label>
         <Input type="file" onChange={handleImageChange} />
       </div>
@@ -91,6 +121,7 @@ function PostForm() {
                       placeholder="Code..."
                       {...form.register(`codeblock.${index}.content`)}
                     />
+
                     <Input
                       type="text"
                       className="w-[20%]"

@@ -25,6 +25,8 @@ export const postSchema = z.object({
     message: "Tech field must have at least one value.",
   }),
   codeblock: z.array(codeBlockSchema),
+  image: z.string().optional(),
+  id: z.string().optional(),
 });
 
 export type postValues = z.infer<typeof postSchema>;

@@ -1,14 +1,16 @@
-import { Button } from "@/components/ui/button";
 import prisma from "@/lib/prisma";
 import Image from "next/image";
 import React from "react";
-import { BadgeCheck, Pencil, Trash } from "lucide-react";
+import { BadgeCheck, Lock } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import DashUserBtn from "@/components/widgets/dashboard/DashUserBtn";
+import UserAdminBtn from "@/components/widgets/dashboard/UserAdminBtn";
+import { auth } from "@/app/auth";
 
 async function page() {
   const [users, sessions] = await Promise.all([
@@ -18,19 +20,8 @@ async function page() {
 
   const onlineUserIds = sessions.map((session) => session.userId);
 
-  async function deleteUser(userId: string) {
-    try {
-      await prisma.user.delete({
-        where: {
-          id: userId,
-        },
-      });
-
-      console.log(`User deleted successfully.`);
-    } catch (error) {
-      console.error(`Error deleting user with ID ${userId}:`, error);
-    }
-  }
+  const session = await auth();
+  const isHeadAdmin = session?.user.headadmin;
 
   return (
     <div>
@@ -75,6 +66,7 @@ async function page() {
               <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
                 <p className="text-sm leading-6 text-gray-900 flex items-center gap-2">
                   {user.role || "user"}
+                  {user.headadmin && <Lock size={13} />}
                 </p>
 
                 {onlineUserIds.includes(user.id) && (
@@ -87,17 +79,15 @@ async function page() {
                 )}
               </div>
 
-              <div className="flex items-center gap-2">
-                <Button variant="outline" size="iconsm">
-                  <Pencil size={17} />
-                </Button>
+              {!user.headadmin && (
+                <div className="flex items-center gap-2">
+                  {isHeadAdmin && (
+                    <UserAdminBtn id={user.id} role={user.role || ""} isHeadAdmin={isHeadAdmin}/>
+                  )}
 
-                <form>
-                  <Button type="submit" variant="destructive" size="iconsm">
-                    <Trash size={17} />
-                  </Button>
-                </form>
-              </div>
+                  <DashUserBtn id={user.id} />
+                </div>
+              )}
             </div>
           </li>
         ))}
