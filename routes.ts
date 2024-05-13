@@ -1,14 +1,17 @@
 // routes do not require authentification
-export const publicRoutes = ["/"];
+export const publicRoutes = ["/", "/projects", "/services"];
 
-// routes do not require authentification
+// routes for admins and require authentification
 export const adminRoutes = ["/admin"];
 
 // routes used for authentification
-export const authRoutes = ["/auth", "/auth/error"];
+export const authRoutes = ["/auth", "/auth/error", "/auth/verify"];
 
 // prefix for api authentification routes
 export const apiAuthPrefix = "/api/auth";
+
+// prefix for api authentification routes
+export const AdminPrefix = "/admin";
 
 // prefix for api authentification routes
 export const Default_Login_Redirect = "/";

@@ -18,8 +18,8 @@ export default function NavBar() {
   const isAdminPage = pathname.startsWith("/admin");
 
   return (
-    <header className="sticky top-0 bg-background px-3 shadow-sm">
-      <nav className="mx-auto flex w-full max-w-7xl h-[70px] items-center justify-between gap-3">
+    <header className="fixed top-0 left-0 w-full h-[70px] bg-transparent backdrop-blur-lg px-3 shadow-sm flex items-center z-[999]">
+      <nav className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3">
         <div className="flex items-center gap-20">
           <Link
             href="/"
@@ -62,7 +62,7 @@ export default function NavBar() {
           <ModeToggle />
           {user && <UserButton user={user} />}
           {session.status === "loading" && (
-            <Skeleton className="w-[40px] h-[40px] rounded-full" />
+            <Skeleton className="w-[40px] h-[40px] rounded-full bg-gray-400" />
           )}
           {!user && session.status !== "loading" && <SignInButton />}
         </div>

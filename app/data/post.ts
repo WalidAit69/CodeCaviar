@@ -19,3 +19,13 @@ export async function getPostById(id: string) {
     throw error;
   }
 }
+
+export async function getPosts() {
+  try {
+    const posts = await prisma.post.findMany({ orderBy: { createdAt: "desc" } });
+
+    return posts;
+  } catch (error) {
+    throw error;
+  }
+}

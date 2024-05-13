@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Signin from "./widgets/Signin";
-import Signup from "./widgets/Signup";
+import Signin from "./widgets/auth/Signin";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import { FiGithub, FiMail } from "react-icons/fi";
@@ -11,6 +10,8 @@ import { signIn } from "next-auth/react";
 import { Default_Login_Redirect } from "@/routes";
 import { useSearchParams } from "next/navigation";
 import { useToast } from "./ui/use-toast";
+import Signup from "./widgets/auth/Signup";
+import Image from "next/image";
 
 const AuthModal = () => {
   const { toast } = useToast();
@@ -29,23 +30,38 @@ const AuthModal = () => {
   }
 
   useEffect(() => {
-    urlError && toast({ description: `${urlError}`, variant: "destructive"});
-  }, [urlError]);
+    urlError && toast({ description: `${urlError}`, variant: "destructive" });
+  }, [urlError, toast]);
 
   return (
     <div
       className={cn(
-        `bg-white dark:bg-black p-12 rounded-xl h-[75%] w-[500px] overflow-y-auto ${
-          RegistrationType && "h-[90%]"
-        } ${RegistrationType === "signup" && "registrationSignUp"}`
+        `bg-white dark:bg-black p-12 rounded-xl max-h-[100%] w-[500px] z-[2] overflow-y-auto relative 
+        shadow-[-10px_-10px_30px_4px_rgba(0,0,0,0.1),_10px_10px_30px_4px_rgba(45,78,255,0.15)] authmodal
+        ${RegistrationType && "max-h-[95%]"}`
       )}
     >
-      <div className="flex flex-col justify-between h-full gap-5">
+      <Image
+        width={200}
+        height={200}
+        src="https://ucarecdn.com/700e87c9-09b5-46ee-83c0-d891ec3f0b62/"
+        alt="logo"
+        className="absolute top-1/2 -left-[60px] w-[200px] blur-sm"
+      />
+
+      <div className="flex flex-col justify-between h-full gap-5 relative z-[2]">
         {!RegistrationType && (
           <div>
             <div>
-              {/* <img src={logo} alt="logo" /> */}
-              <span className="font-Monument text-2xl font-[600] mt-5">
+              <Image
+                width={40}
+                height={40}
+                src="https://ucarecdn.com/f44e4807-b1f3-4418-ac10-4a654ca37301/"
+                alt="logo"
+                className="mb-4"
+              />
+
+              <span className="font-Monument text-2xl font-[600]">
                 Sign in to unlock the best of Code caviar.
               </span>
             </div>
@@ -101,7 +117,7 @@ const AuthModal = () => {
           <Signup setRegistrationType={setRegistrationType} />
         )}
 
-        <div className="text-center text-xs pb-2 flex gap-1 flex-col mt-5">
+        <div className="text-center text-xs pb-2 flex gap-1 flex-col mt-5 z-10">
           <p>
             By proceeding, you agree to our Terms of Use and confirm you have
             read our Privacy and Cookie Statement.

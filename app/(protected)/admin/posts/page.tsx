@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic";
-
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import React from "react";
@@ -12,14 +10,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import prisma from "@/lib/prisma";
 import { Pencil } from "lucide-react";
 import DashPostBtn from "@/components/widgets/dashboard/DashPostBtn";
 import DashBtn from "@/components/widgets/dashboard/DachBtn";
+import { getPosts } from "@/app/data/post";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Dashboard | Posts",
+};
 
 async function page() {
-  const posts = await prisma.post.findMany({ orderBy: { createdAt: "desc" } });
+  const posts = await getPosts();
 
   return (
     <div>

@@ -1,6 +1,5 @@
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { signUpShema, signUpValues } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,8 +10,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../ui/form";
-import { useToast } from "../ui/use-toast";
+} from "@/components/ui/form";
+import { useToast } from "@/components/ui/use-toast";
 import { SignUp } from "@/app/auth/action";
 import { useState } from "react";
 import { ChevronLeft, Loader2 } from "lucide-react";
@@ -36,8 +35,9 @@ const Signup = ({ setRegistrationType }: Props) => {
   async function onSubmit(data: signUpValues) {
     try {
       setloading(true);
-      await SignUp(data);
-      toast({ description: "user created" });
+      const res = await SignUp(data);
+      toast({ description: `${res?.msg}` });
+      setRegistrationType("signin");
     } catch (error) {
       console.log(error);
       toast({ description: `${error}`, variant: "destructive" });
@@ -126,11 +126,7 @@ const Signup = ({ setRegistrationType }: Props) => {
             )}
           />
 
-          <button disabled={loading} className="text-start underline w-fit">
-            Forgot password?
-          </button>
-
-          <Button disabled={loading}>
+          <Button disabled={loading} className="mt-5">
             {loading ? (
               <Loader2 size={25} className="mx-auto my-10 animate-spin" />
             ) : (

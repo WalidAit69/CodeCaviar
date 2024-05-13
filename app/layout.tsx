@@ -5,8 +5,8 @@ import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/lib/theme-provider";
 import NavBar from "@/components/NavBar";
 import { SessionProvider } from "next-auth/react";
-import { Toaster } from "@/components/ui/toaster"
-
+import { Toaster } from "@/components/ui/toaster";
+import "./styles.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -24,7 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "min-h-screen bg-background antialiased font-Satoshi",
+          "min-h-screen bg-background antialiased relative font-Satoshi",
           inter.variable
         )}
       >

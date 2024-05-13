@@ -6,6 +6,7 @@ import authConfig from "./auth.config";
 import { getUserById } from "./data/user";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  trustHost: true,
   pages: {
     signIn: "/auth",
     error: "/auth/error",
@@ -19,6 +20,17 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
   },
   callbacks: {
+    async signIn({ user, account }) {
+      if (account?.provider !== "credentials") return true;
+
+      const existinguser = await getUserById(user.id as string);
+
+      if (!existinguser?.emailVerified) {
+        return false;
+      }
+
+      return true;
+    },
     async session({ token, session }) {
       if (token.sub && token.role && session.user) {
         session.user.id = token.sub;

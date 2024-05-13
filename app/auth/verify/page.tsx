@@ -1,14 +1,9 @@
-import AuthModal from "@/components/AuthModal";
-import React from "react";
-import { auth } from "../auth";
-import { redirect } from "next/navigation";
+import { getVerificationTokenbyToken } from "@/app/data/verification-token";
+import AuthVerify from "@/components/widgets/auth/AuthVerify";
 import Image from "next/image";
+import React from "react";
 
 async function page() {
-  const session = await auth();
-
-  session && redirect("/");
-
   return (
     <section className="h-[100vh] pt-[70px] flex items-center justify-center relative">
       <div className="absolute inset-0 backdrop-filter backdrop-blur-md backdrop-brightness-25 brightness-95 z-[1]"></div>
@@ -38,8 +33,7 @@ async function page() {
           className="absolute top-[0%] right-[50%] rotate-90 select-none"
         />
       </div>
-
-      <AuthModal />
+      <AuthVerify />
     </section>
   );
 }

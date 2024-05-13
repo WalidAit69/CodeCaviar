@@ -23,7 +23,7 @@ function UserAdminBtn({
 }: {
   id: string;
   role: string;
-  isHeadAdmin: boolean;
+  isHeadAdmin: boolean | null;
 }) {
   const { toast } = useToast();
 
@@ -33,7 +33,7 @@ function UserAdminBtn({
   async function UpdateUser() {
     try {
       setLoading(true);
-      await ToggleAdmin(id, role, isHeadAdmin);
+      await ToggleAdmin(id, role);
       toast({ description: "User updated." });
       window.location.reload();
     } catch (error) {
@@ -54,7 +54,7 @@ function UserAdminBtn({
         onClick={() => setDialogOpen(true)}
         className="whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 w-9 flex justify-center items-center"
       >
-        {isHeadAdmin && role === "admin" ? (
+        {isHeadAdmin && role === "ADMIN" ? (
           <ShieldOff size="17" />
         ) : (
           <Shield size="17" />

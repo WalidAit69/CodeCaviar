@@ -1,6 +1,7 @@
 "use server";
 
 import { getPostById, getPostBySlug } from "@/app/data/post";
+import { currentRole } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { postValues } from "@/lib/validation";
 import {
@@ -9,6 +10,7 @@ import {
   DeleteObjectCommand,
 } from "@aws-sdk/client-s3";
 import { redirect } from "next/navigation";
+
 
 // Configure AWS SDK
 const s3Client = new S3Client({
@@ -77,6 +79,12 @@ async function DeleteImageFromS3(image: string) {
 
 export async function AddPost(data: postValues, formData: FormData) {
   try {
+    const role = await currentRole();
+
+    if (role !== "ADMIN") {
+      throw new Error("Unauthorized");
+    }
+
     const post = await getPostBySlug(data.slug);
 
     if (post) {
@@ -119,6 +127,12 @@ export async function UpdatePost(
   formData: FormData
 ) {
   try {
+    const role = await currentRole();
+
+    if (role !== "ADMIN") {
+      throw new Error("Unauthorized");
+    }
+
     const post = await getPostById(id);
 
     if (!post) {
@@ -173,7 +187,13 @@ export async function UpdatePost(
 
 export async function DeletePost(id: string) {
   try {
-    const post = await getPostById(id)
+    const role = await currentRole();
+
+    if (role !== "ADMIN") {
+      throw new Error("Unauthorized");
+    }
+
+    const post = await getPostById(id);
 
     if (!post) {
       throw new Error("Post not found");
@@ -193,6 +213,12 @@ export async function DeletePost(id: string) {
 
 export async function ToggleStatus(id: string, status: boolean) {
   try {
+    const role = await currentRole();
+
+    if (role !== "ADMIN") {
+      throw new Error("Unauthorized");
+    }
+
     await prisma.post.update({
       where: { id },
       data: { active: !status },

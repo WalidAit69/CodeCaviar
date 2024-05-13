@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { signInShema, signInValues } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -10,8 +10,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../ui/form";
-import { useToast } from "../ui/use-toast";
+} from "@/components/ui/form";
+import { useToast } from "@/components/ui/use-toast";
 import { SignIn } from "@/app/auth/action";
 import { ChevronLeft, Loader2 } from "lucide-react";
 import { useState } from "react";
@@ -35,11 +35,19 @@ const Signin = ({ setRegistrationType }: Props) => {
   async function onSubmit(data: signInValues) {
     try {
       setloading(true);
-      await SignIn(data);
-      window.location.reload();
+      const res = await SignIn(data);
+      res &&
+        toast({
+          description: `${res?.msg}`,
+        });
+
+      !res?.msg && window.location.reload();
     } catch (error) {
       console.log(error);
-      toast({ description: `${error}`, variant: "destructive" });
+      toast({
+        description: `${error}`,
+        variant: "destructive",
+      });
     } finally {
       setloading(false);
     }

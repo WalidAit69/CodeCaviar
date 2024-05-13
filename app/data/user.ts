@@ -19,3 +19,13 @@ export async function getUserById(id: string) {
     throw error;
   }
 }
+
+export async function getUsers() {
+  try {
+    const users = await prisma.user.findMany();
+
+    return users;
+  } catch (error) {
+    throw error;
+  }
+}

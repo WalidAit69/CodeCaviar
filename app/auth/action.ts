@@ -11,6 +11,12 @@ import bcrypt from "bcryptjs";
 import { getUserByEmail } from "../data/user";
 import { signIn } from "../auth";
 import { Default_Login_Redirect } from "@/routes";
+import { generateToken } from "@/lib/tokens";
+import {
+  getVerificationTokenbyEmail,
+  getVerificationTokenbyToken,
+} from "../data/verification-token";
+import { sendVerificationEmail } from "@/lib/mail";
 
 export async function SignIn(data: signInValues) {
   try {
@@ -40,7 +46,33 @@ export async function SignIn(data: signInValues) {
       }
 
       if (!user.emailVerified) {
-        throw new Error("Please Verify your email");
+        const existingToken = await getVerificationTokenbyEmail(user.email);
+
+        if (existingToken) {
+          const hasExpired = new Date(existingToken.expires) < new Date();
+
+          if (hasExpired) {
+            const token = await generateToken(user.email);
+            await sendVerificationEmail(
+              token.email,
+              token.token,
+              user.name as string
+            );
+
+            return { msg: "Confirmation email sent!" };
+          }
+
+          return { msg: "Confirmation email has been Already sent!" };
+        }
+
+        const token = await generateToken(user.email);
+        await sendVerificationEmail(
+          token.email,
+          token.token,
+          user.name as string
+        );
+
+        return { msg: "Confirmation email sent!" };
       }
 
       await signIn("credentials", {
@@ -48,8 +80,6 @@ export async function SignIn(data: signInValues) {
         password,
         redirectTo: Default_Login_Redirect,
       });
-
-      // revalidatePath("/");
     }
   } catch (error) {
     console.log(error);
@@ -84,8 +114,49 @@ export async function SignUp(values: signUpValues) {
         },
       });
 
-      //   TODO : Send verification token email
+      const token = await generateToken(email);
+
+      await sendVerificationEmail(token.email, token.token);
+
+      return { msg: "Confirmation email sent!" };
     }
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function TokenVerify(token: string) {
+  try {
+    const existingToken = await getVerificationTokenbyToken(token);
+
+    if (!existingToken) {
+      throw new Error("Token does not exist");
+    }
+
+    const hasExpired = new Date(existingToken.expires) < new Date();
+
+    if (hasExpired) {
+      throw new Error("Token expired");
+    }
+
+    const user = await getUserByEmail(existingToken.email);
+
+    if (!user) {
+      throw new Error("Email does not exist!");
+    }
+
+    await prisma.user.update({
+      where: { id: user.id },
+      data: {
+        emailVerified: new Date(),
+        email: existingToken.email,
+      },
+    });
+
+    await prisma.verificationToken.delete({ where: { id: existingToken.id } });
+
+    return { msg: "Email verified" };
   } catch (error) {
     console.log(error);
     throw error;

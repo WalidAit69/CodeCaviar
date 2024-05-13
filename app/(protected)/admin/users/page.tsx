@@ -1,4 +1,3 @@
-import prisma from "@/lib/prisma";
 import Image from "next/image";
 import React from "react";
 import { BadgeCheck, Lock } from "lucide-react";
@@ -10,19 +9,19 @@ import {
 } from "@/components/ui/tooltip";
 import DashUserBtn from "@/components/widgets/dashboard/DashUserBtn";
 import UserAdminBtn from "@/components/widgets/dashboard/UserAdminBtn";
-import { auth } from "@/app/auth";
+import { getUsers } from "@/app/data/user";
+import { currentUser } from "@/lib/auth";
+import { Metadata } from "next";
+import picture from "@/assets/images/avatar_placeholder.png";
+
+export const metadata: Metadata = {
+  title: "Dashboard | Users",
+};
 
 async function page() {
-  const [users] = await Promise.all([
-    prisma.user.findMany(),
-    // prisma.session.findMany(),
-  ]);
-
-  // const onlineUserIds = sessions.map((session) => session.userId);
-
-  // const session = await auth();
-  // const isHeadAdmin = session?.user.headadmin;
-  const isHeadAdmin = true;
+  const users = await getUsers();
+  const session = await currentUser();
+  const isHeadAdmin = session?.headadmin;
 
   return (
     <div>
@@ -36,7 +35,7 @@ async function page() {
             <div className="flex min-w-0 gap-x-4">
               <Image
                 className="h-12 w-12 flex-none rounded-full bg-gray-50"
-                src={user.image || ""}
+                src={user.image || picture}
                 alt="profile picture"
                 width={50}
                 height={50}
@@ -70,20 +69,24 @@ async function page() {
                   {user.headadmin && <Lock size={13} />}
                 </p>
 
-                {/* {onlineUserIds.includes(user.id) && (
+                {session?.id === user.id && (
                   <div className="mt-1 flex items-center gap-x-1.5">
                     <div className="flex-none rounded-full bg-emerald-500/20 p-1 animate-pulse">
                       <div className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
                     </div>
                     <p className="text-xs leading-5 text-gray-500">Online</p>
                   </div>
-                )} */}
+                )}
               </div>
 
               {!user.headadmin && (
                 <div className="flex items-center gap-2">
                   {isHeadAdmin && (
-                    <UserAdminBtn id={user.id} role={user.role || ""} isHeadAdmin={isHeadAdmin}/>
+                    <UserAdminBtn
+                      id={user.id}
+                      role={user.role || ""}
+                      isHeadAdmin={isHeadAdmin}
+                    />
                   )}
 
                   <DashUserBtn id={user.id} />
