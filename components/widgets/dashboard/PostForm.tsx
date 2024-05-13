@@ -19,7 +19,7 @@ import { CodeBlock } from "../../CodeBlock";
 import { Textarea } from "@/components/ui/textarea";
 import TagsInput from "react-tagsinput";
 import "react-tagsinput/react-tagsinput.css";
-import { AddPost, UpdatePost } from "@/app/admin/posts/actions";
+import { AddPost, UpdatePost } from "@/app/(protected)/admin/posts/actions";
 import { Label } from "../../ui/label";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";

@@ -19,7 +19,7 @@ export default function NavBar() {
 
   return (
     <header className="sticky top-0 bg-background px-3 shadow-sm">
-      <nav className="mx-auto flex h-14 w-full max-w-7xl items-center justify-between gap-3">
+      <nav className="mx-auto flex w-full max-w-7xl h-[70px] items-center justify-between gap-3">
         <div className="flex items-center gap-20">
           <Link
             href="/"

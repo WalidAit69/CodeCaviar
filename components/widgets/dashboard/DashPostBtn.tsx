@@ -12,7 +12,7 @@ import {
   AlertDialogCancel,
   AlertDialogAction,
 } from "@/components/ui/alert-dialog";
-import { DeletePost } from "@/app/admin/posts/actions";
+import { DeletePost } from "@/app/(protected)/admin/posts/actions";
 import { Loader2, Trash } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 

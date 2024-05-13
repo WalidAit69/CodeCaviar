@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Loader2, Trash } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
-import { DeleteUser } from "@/app/admin/users/actions";
+import { DeleteUser } from "@/app/(protected)/admin/users/actions";
 
 function DashUserBtn({ id }: { id: string }) {
   const { toast } = useToast();

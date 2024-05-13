@@ -7,6 +7,12 @@ const nextConfig = {
             },
             {
                 hostname: "codecaviar.s3.amazonaws.com"
+            },
+            {
+                hostname: "avatars.githubusercontent.com"
+            },
+            {
+                hostname: "ucarecdn.com"
             }
         ]
     }

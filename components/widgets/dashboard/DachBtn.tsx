@@ -12,7 +12,7 @@ import {
   AlertDialogCancel,
   AlertDialogAction,
 } from "@/components/ui/alert-dialog";
-import { ToggleStatus } from "@/app/admin/posts/actions";
+import { ToggleStatus } from "@/app/(protected)/admin/posts/actions";
 import { CirclePause, CirclePlay, Loader2 } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 

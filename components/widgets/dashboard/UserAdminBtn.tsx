@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Loader2, Shield, ShieldOff } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
-import { ToggleAdmin } from "@/app/admin/users/actions";
+import { ToggleAdmin } from "@/app/(protected)/admin/users/actions";
 
 function UserAdminBtn({
   id,

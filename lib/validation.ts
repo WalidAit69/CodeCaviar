@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+// Post Form Validation
+
 export const codeBlockSchema = z.object({
   content: z.string().min(1, {
     message: "Tech field must have at least one value.",
@@ -30,3 +32,26 @@ export const postSchema = z.object({
 });
 
 export type postValues = z.infer<typeof postSchema>;
+
+// User Form
+// Sign in Form
+
+export const signInShema = z.object({
+  email: z.string().email({ message: "Invalid email adress" }),
+  password: z
+    .string()
+    .min(10, { message: "Password must be at least 10 characters." }),
+});
+
+export type signInValues = z.infer<typeof signInShema>;
+
+// Sign up Form
+export const signUpShema = z.object({
+  fullname: z.string().min(1, { message: "Please enter your name" }),
+  email: z.string().email({ message: "Invalid email adress" }),
+  password: z
+    .string()
+    .min(10, { message: "Password must be at least 10 characters." }),
+});
+
+export type signUpValues = z.infer<typeof signUpShema>;
