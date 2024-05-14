@@ -3,8 +3,8 @@ import React from "react";
 
 function page() {
   return (
-    <main className="grid min-h-full place-items-center px-6 py-24 sm:py-32 lg:px-8">
-      <div className="text-center">
+    <section className="grid min-h-full place-items-center px-6 py-24 sm:py-32 lg:px-8">
+      <div className="text-center z-10">
         <h1 className="mt-4 text-3xl font-bold tracking-tight sm:text-5xl">
           Oops! Something went wrong
         </h1>
@@ -20,7 +20,7 @@ function page() {
           </a>
         </div>
       </div>
-    </main>
+    </section>
   );
 }
 

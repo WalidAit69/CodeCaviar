@@ -5,7 +5,12 @@ export const publicRoutes = ["/", "/projects", "/services"];
 export const adminRoutes = ["/admin"];
 
 // routes used for authentification
-export const authRoutes = ["/auth", "/auth/error", "/auth/verify"];
+export const authRoutes = [
+  "/auth",
+  "/auth/error",
+  "/auth/verify",
+  "/auth/reset",
+];
 
 // prefix for api authentification routes
 export const apiAuthPrefix = "/api/auth";

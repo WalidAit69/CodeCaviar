@@ -16,6 +16,7 @@ import Image from "next/image";
 const AuthModal = () => {
   const { toast } = useToast();
   const [RegistrationType, setRegistrationType] = useState("");
+  const [loading, setloading] = useState(false);
 
   const searchParams = useSearchParams();
   const urlError =
@@ -24,6 +25,7 @@ const AuthModal = () => {
       : "";
 
   function onClick(provider: "google" | "github") {
+    setloading(true);
     signIn(provider, {
       callbackUrl: Default_Login_Redirect,
     });
@@ -68,6 +70,7 @@ const AuthModal = () => {
 
             <div className="flex flex-col mt-16 gap-5">
               <Button
+                disabled={loading}
                 onClick={() => onClick("google")}
                 variant={"outline"}
                 className="relative w-full h-14 rounded-3xl text-md bg-transparent border-2 border-gray-600 font-bold"
@@ -82,6 +85,7 @@ const AuthModal = () => {
               </Button>
 
               <Button
+                disabled={loading}
                 onClick={() => onClick("github")}
                 variant={"outline"}
                 className="relative w-full h-14 rounded-3xl text-md bg-transparent border-2 border-gray-600 font-bold"
@@ -97,6 +101,7 @@ const AuthModal = () => {
 
               <Button
                 variant={"outline"}
+                disabled={loading}
                 className="relative w-full h-14 rounded-3xl text-md bg-transparent border-2 border-gray-600 font-bold"
                 onClick={() => setRegistrationType("signin")}
               >

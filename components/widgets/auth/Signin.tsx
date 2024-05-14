@@ -15,6 +15,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { SignIn } from "@/app/auth/action";
 import { ChevronLeft, Loader2 } from "lucide-react";
 import { useState } from "react";
+import Link from "next/link";
 
 interface Props {
   setRegistrationType: React.Dispatch<React.SetStateAction<string>>;
@@ -114,8 +115,12 @@ const Signin = ({ setRegistrationType }: Props) => {
             )}
           />
 
-          <button disabled={loading} className="text-start underline w-fit">
-            Forgot password?
+          <button
+            type="button"
+            disabled={loading}
+            className="text-start underline w-fit"
+          >
+            <Link href="/auth/reset">Forgot password?</Link>
           </button>
 
           <Button disabled={loading}>
