@@ -1,4 +1,3 @@
-import { auth } from "@/app/auth";
 import getSession from "./getSession";
 
 

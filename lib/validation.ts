@@ -35,7 +35,6 @@ export type postValues = z.infer<typeof postSchema>;
 
 // User Form
 // Sign in Form
-
 export const signInShema = z.object({
   email: z.string().email({ message: "Invalid email adress" }),
   password: z
@@ -55,3 +54,41 @@ export const signUpShema = z.object({
 });
 
 export type signUpValues = z.infer<typeof signUpShema>;
+
+
+// password
+export const ResetShema = z.object({
+  email: z.string().email({ message: "Invalid email adress" }),
+});
+
+export type ResetValues = z.infer<typeof ResetShema>;
+
+
+// otp
+export const OTPSchema = z.object({
+  pin: z.string().min(6, {
+    message: "Your one-time password must be 6 characters.",
+  }),
+  email: z.string().email({ message: "Invalid email adress" }),
+});
+
+export type OTPValues = z.infer<typeof OTPSchema>;
+
+
+// Reset password
+export const ResetPassShema = z
+  .object({
+    password: z
+      .string()
+      .min(10, { message: "Password must be at least 10 characters." }),
+    confirmPassword: z
+      .string()
+      .min(10, { message: "Password must be at least 10 characters." }),
+    email: z.string().email({ message: "Invalid email adress" }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ["confirmPassword"],
+  });
+
+export type ResetPassShemaValues = z.infer<typeof ResetPassShema>;

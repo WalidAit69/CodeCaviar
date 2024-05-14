@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/form";
 import { useToast } from "@/components/ui/use-toast";
 import { SignIn } from "@/app/auth/action";
-import { ChevronLeft, Loader2 } from "lucide-react";
+import { ChevronLeft, Eye, EyeOff, Loader2 } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
 
@@ -23,6 +23,7 @@ interface Props {
 
 const Signin = ({ setRegistrationType }: Props) => {
   const [loading, setloading] = useState(false);
+  const [showPass, setshowPass] = useState(false);
   const { toast } = useToast();
 
   const form = useForm<signInValues>({
@@ -66,7 +67,6 @@ const Signin = ({ setRegistrationType }: Props) => {
           <ChevronLeft />
         </Button>
         <div className="flex flex-col mt-8 gap-2">
-          {/* <img src={logo} alt="logo" /> */}
           <span className="font-Monument text-2xl font-[600] mt-5">
             Welcome back.
           </span>
@@ -102,13 +102,24 @@ const Signin = ({ setRegistrationType }: Props) => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input
-                    type="password"
-                    placeholder="Password"
-                    className="h-12"
-                    {...field}
-                  />
+                <FormControl className="relative">
+                  <div>
+                    <Input
+                      type={showPass ? "text" : "password"}
+                      placeholder="Password"
+                      className="h-12"
+                      {...field}
+                    />
+                    <Button
+                      type="button"
+                      size="iconsm"
+                      variant="outline"
+                      onClick={() => setshowPass(!showPass)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full"
+                    >
+                      {showPass ? <EyeOff size={20} /> : <Eye size={20}/>}
+                    </Button>
+                  </div>
                 </FormControl>
                 <FormMessage />
               </FormItem>

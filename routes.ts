@@ -10,6 +10,8 @@ export const authRoutes = [
   "/auth/error",
   "/auth/verify",
   "/auth/reset",
+  "/auth/reset/otp",
+  "/auth/reset/otp/passwordreset",
 ];
 
 // prefix for api authentification routes
