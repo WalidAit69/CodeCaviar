@@ -195,7 +195,7 @@ function PostForm({ post }: { post?: postValues | null }) {
               <FormItem>
                 <FormLabel>Description</FormLabel>
                 <FormControl>
-                  <Input placeholder="Description..." {...field} />
+                  <Input className="h-14" placeholder="Description..." {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -213,7 +213,7 @@ function PostForm({ post }: { post?: postValues | null }) {
                   <TagsInput
                     {...field}
                     onlyUnique
-                    className="flex items-center h-full w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="flex items-center h-14 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                   />
                 </FormControl>
                 <FormDescription>
@@ -224,7 +224,7 @@ function PostForm({ post }: { post?: postValues | null }) {
             )}
           />
 
-          <Button type="submit" className="w-full" disabled={loading}>
+          <Button type="submit" className="w-full sm:w-[300px]" disabled={loading}>
             {loading ? (
               <Loader2 size={22} className="mx-auto my-10 animate-spin" />
             ) : (

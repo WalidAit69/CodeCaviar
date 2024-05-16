@@ -29,7 +29,7 @@ async function page() {
         <h1 className="text-2xl font-bold">Users</h1>
       </div>
 
-      <ul role="list" className="divide-y divide-gray-100">
+      <ul role="list" className="divide-y divide-gray-100 dark:divide-gray-800">
         {users.map((user) => (
           <li key={user.email} className="flex justify-between gap-x-6 py-5">
             <div className="flex min-w-0 gap-x-4">

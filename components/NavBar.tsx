@@ -28,7 +28,7 @@ export default function NavBar() {
     <>
       <header
         className={cn(
-          `fixed top-0 left-0 w-full h-[70px] bg-transparent backdrop-blur-lg shadow-sm flex items-center z-[9999]`,
+          `fixed top-0 left-0 w-full h-[70px] bg-transparent backdrop-blur-lg shadow-sm flex items-center z-[102]`,
           MenuOpen && "backdrop-blur-none"
         )}
       >

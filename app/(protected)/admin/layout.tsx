@@ -17,7 +17,7 @@ async function AdminLayout({
   Role !== "ADMIN" && redirect("/");
 
   return (
-    <main className="menu-blur md:h-[100vh] py-[110px] w-full max-w-[100rem] max-[1700px]:max-w-[90%] max-[500px]:max-w-[95%] mx-auto">
+    <main className="menu-blur md:h-[100vh] pt-[110px] w-full max-w-[100rem] max-[1700px]:max-w-[90%] max-[500px]:max-w-[95%] mx-auto">
       {children}
     </main>
   );

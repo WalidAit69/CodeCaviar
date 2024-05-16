@@ -9,7 +9,7 @@ async function page({ params: { id } }: { params: { id: string } }) {
   });
 
   return (
-    <section className="pb-[70px]">
+    <section className="pb-10">
       <h1 className="text-4xl font-[900] mb-10">Edit Post</h1>
       <PostForm post={post} />
     </section>

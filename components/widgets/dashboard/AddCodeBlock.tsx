@@ -59,10 +59,10 @@ function AddCodeBlock({ Postform }: Props) {
     <div className="mt-12">
       <Dialog>
         <DialogTrigger asChild className="w-full">
-          <Button variant="secondary">Add Code Block</Button>
+          <Button className="w-full sm:w-[300px]">Add Code Block</Button>
         </DialogTrigger>
 
-        <DialogContent className="sm:max-w-[425px] overflow-y-auto z-[9999]">
+        <DialogContent className="sm:max-w-[500px] z-[9999]">
           <DialogHeader>
             <DialogTitle>Add Code Block</DialogTitle>
             <DialogDescription>
