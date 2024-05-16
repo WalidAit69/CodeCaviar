@@ -4,10 +4,16 @@ import { z } from "zod";
 
 export const codeBlockSchema = z.object({
   content: z.string().min(1, {
-    message: "Tech field must have at least one value.",
+    message: "Add Code",
   }),
   language: z.string().min(1, {
-    message: "Tech field must have at least one value.",
+    message: "Add language",
+  }),
+  title: z.string().min(1, {
+    message: "Add title",
+  }),
+  decription: z.string().min(1, {
+    message: "Add description",
   }),
 });
 
@@ -55,14 +61,12 @@ export const signUpShema = z.object({
 
 export type signUpValues = z.infer<typeof signUpShema>;
 
-
 // password
 export const ResetShema = z.object({
   email: z.string().email({ message: "Invalid email adress" }),
 });
 
 export type ResetValues = z.infer<typeof ResetShema>;
-
 
 // otp
 export const OTPSchema = z.object({
@@ -73,7 +77,6 @@ export const OTPSchema = z.object({
 });
 
 export type OTPValues = z.infer<typeof OTPSchema>;
-
 
 // Reset password
 export const ResetPassShema = z

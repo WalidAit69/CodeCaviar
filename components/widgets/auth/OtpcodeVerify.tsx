@@ -42,10 +42,10 @@ function OtpcodeVerify() {
 
   return (
     <div
-      className="bg-white dark:bg-black p-12 rounded-xl w-[500px] overflow-y-auto relative z-[2]
-  shadow-[-10px_-10px_30px_4px_rgba(0,0,0,0.1),_10px_10px_30px_4px_rgba(45,78,255,0.15)] authmodal"
+      className="bg-white dark:bg-black p-12 sm:rounded-xl h-full flex items-center justify-center sm:h-auto w-full sm:w-[500px] overflow-y-auto relative z-[2]
+      shadow-[-10px_-10px_30px_4px_rgba(0,0,0,0.1),_10px_10px_30px_4px_rgba(45,78,255,0.15)] authmodal"
     >
-      <div className="flex flex-col justify-between h-full gap-5">
+      <div className="flex flex-col items-center justify-center h-full gap-5">
         <div>
           <div className="flex items-center gap-4">
             <Image
@@ -61,7 +61,7 @@ function OtpcodeVerify() {
               alt="logo"
             />
 
-            <span className="font-Monument text-2xl font-[600]">
+            <span className="font-Monument sm:text-2xl text-xl font-[600]">
               {!error && !message && "Verifiying..."}
               {message && "Reset Password"}
               {!message && error && "Please retry"}

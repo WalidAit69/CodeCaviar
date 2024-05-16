@@ -59,7 +59,7 @@ const Signup = ({ setRegistrationType }: Props) => {
           <ChevronLeft />
         </Button>
         <div className="flex flex-col mt-8 gap-2">
-          <span className="font-Monument text-2xl font-[600] mt-5">
+          <span className="font-Monument text-xl sm:text-2xl font-[600] mt-5">
             Join to unlock the best of Morocco.
           </span>
         </div>

@@ -38,9 +38,9 @@ const AuthModal = () => {
   return (
     <div
       className={cn(
-        `bg-white dark:bg-black p-12 rounded-xl max-h-[100%] w-[500px] z-[2] overflow-y-auto relative 
+        `bg-white dark:bg-black p-12 max-[400px]:px-3 sm:rounded-xl h-full sm:h-auto max-h-[100%] w-full sm:w-[500px] z-[2] overflow-y-auto relative 
         shadow-[-10px_-10px_30px_4px_rgba(0,0,0,0.1),_10px_10px_30px_4px_rgba(45,78,255,0.15)] authmodal
-        ${RegistrationType && "max-h-[95%]"}`
+        ${RegistrationType && "sm:max-h-[95%]"}`
       )}
     >
       <Image
@@ -63,7 +63,7 @@ const AuthModal = () => {
                 className="mb-4"
               />
 
-              <span className="font-Monument text-2xl font-[600]">
+              <span className="font-Monument sm:text-2xl text-xl font-[600]">
                 Sign in to unlock the best of Code caviar.
               </span>
             </div>
@@ -122,7 +122,7 @@ const AuthModal = () => {
           <Signup setRegistrationType={setRegistrationType} />
         )}
 
-        <div className="text-center text-xs pb-2 flex gap-1 flex-col mt-5 z-10">
+        <div className="text-center sm:text-xs text-[.7rem] pb-2 flex gap-1 flex-col mt-5 z-10">
           <p>
             By proceeding, you agree to our Terms of Use and confirm you have
             read our Privacy and Cookie Statement.

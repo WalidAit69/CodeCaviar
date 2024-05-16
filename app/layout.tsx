@@ -24,7 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "min-h-screen bg-background antialiased relative font-Satoshi",
+          "antialiased relative font-Satoshi bg-background bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#272727_1px,transparent_1px)] [background-size:16px_16px]",
           inter.variable
         )}
       >

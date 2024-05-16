@@ -12,12 +12,15 @@ async function AdminLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   const Role = await currentRole();
 
   Role !== "ADMIN" && redirect("/");
 
-  return <div className="max-w-7xl mx-auto my-20">{children}</div>;
+  return (
+    <main className="menu-blur md:h-[100vh] py-[110px] w-full max-w-[100rem] max-[1700px]:max-w-[90%] max-[500px]:max-w-[95%] mx-auto">
+      {children}
+    </main>
+  );
 }
 
 export default AdminLayout;

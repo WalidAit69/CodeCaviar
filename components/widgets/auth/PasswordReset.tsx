@@ -51,8 +51,8 @@ function PasswordReset() {
 
   return (
     <div
-      className="bg-white dark:bg-black p-12 rounded-xl max-h-[100%] w-[500px] z-[2] overflow-y-auto relative 
-    shadow-[-10px_-10px_30px_4px_rgba(0,0,0,0.1),_10px_10px_30px_4px_rgba(45,78,255,0.15)] authmodal"
+      className="flex flex-col justify-center bg-white dark:bg-black p-12 max-[400px]:px-3 sm:rounded-xl h-full sm:h-auto max-h-[100%] w-full sm:w-[500px] z-[2] overflow-y-auto relative 
+      shadow-[-10px_-10px_30px_4px_rgba(0,0,0,0.1),_10px_10px_30px_4px_rgba(45,78,255,0.15)] authmodal"
     >
       <div>
         <div className="flex flex-col">
@@ -63,10 +63,10 @@ function PasswordReset() {
             alt="logo"
             className="mb-4"
           />
-          <span className="font-Monument text-2xl font-[600] mt-5">
+          <span className="font-Monument text-xl sm:text-2xl font-[600] mt-5">
             Reset password
           </span>
-          <span className="text-muted-foreground text-base">
+          <span className="text-muted-foreground text-sm sm:text-base">
             Enter your email to reset your password
           </span>
         </div>

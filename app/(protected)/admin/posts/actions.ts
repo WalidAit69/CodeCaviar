@@ -3,14 +3,13 @@
 import { getPostById, getPostBySlug } from "@/app/data/post";
 import { currentRole } from "@/lib/auth";
 import prisma from "@/lib/prisma";
-import { postValues } from "@/lib/validation";
+import { codeBlockValues, postValues } from "@/lib/validation";
 import {
   S3Client,
   PutObjectCommand,
   DeleteObjectCommand,
 } from "@aws-sdk/client-s3";
 import { redirect } from "next/navigation";
-
 
 // Configure AWS SDK
 const s3Client = new S3Client({
@@ -104,12 +103,12 @@ export async function AddPost(data: postValues, formData: FormData) {
         ...data,
         image,
         codeblock: {
-          create: codeblocksData.map(
-            (block: { content: string; language: string }) => ({
-              content: block.content,
-              language: block.language,
-            })
-          ),
+          create: codeblocksData.map((block: codeBlockValues) => ({
+            content: block.content,
+            language: block.language,
+            decription: block.decription,
+            title: block.title,
+          })),
         },
       },
     });
@@ -168,12 +167,12 @@ export async function UpdatePost(
         image,
         codeblock: {
           deleteMany: {},
-          create: codeblocksData.map(
-            (block: { content: string; language: string }) => ({
-              content: block.content,
-              language: block.language,
-            })
-          ),
+          create: codeblocksData.map((block: codeBlockValues) => ({
+            content: block.content,
+            language: block.language,
+            decription: block.decription,
+            title: block.title,
+          })),
         },
       },
     });

@@ -14,12 +14,20 @@ import {
   DropdownMenuTrigger,
 } from "../../ui/dropdown-menu";
 import { signOut } from "next-auth/react";
+import { useMenu } from "@/store/store";
 
 interface UserButtonProps {
   user: User;
 }
 
 export default function UserButton({ user }: UserButtonProps) {
+  const { closeMenu } = useMenu();
+
+  function handleSignOut() {
+    closeMenu();
+    signOut({ callbackUrl: "/" });
+  }
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -33,19 +41,19 @@ export default function UserButton({ user }: UserButtonProps) {
           />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
+      <DropdownMenuContent className="w-56 z-[9999]">
         <DropdownMenuLabel>{user.name || "User"}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
-            <Link href="/settings">
+            <Link href="/settings" onClick={closeMenu}>
               <Settings className="mr-2 h-4 w-4" />
               <span>Settings</span>
             </Link>
           </DropdownMenuItem>
           {user.role === "ADMIN" && (
             <DropdownMenuItem asChild>
-              <Link href="/admin">
+              <Link href="/admin" onClick={closeMenu}>
                 <Lock className="mr-2 h-4 w-4" />
                 Admin
               </Link>
@@ -54,10 +62,7 @@ export default function UserButton({ user }: UserButtonProps) {
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <Button
-            onClick={() => signOut({ callbackUrl: "/" })}
-            className="flex w-full items-center"
-          >
+          <Button onClick={handleSignOut} className="flex w-full items-center">
             <LogOut className="mr-2 h-4 w-4" /> Sign Out
           </Button>
         </DropdownMenuItem>

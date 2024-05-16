@@ -15,8 +15,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { CodeBlock } from "../../CodeBlock";
-import { Textarea } from "@/components/ui/textarea";
 import TagsInput from "react-tagsinput";
 import "react-tagsinput/react-tagsinput.css";
 import { AddPost, UpdatePost } from "@/app/(protected)/admin/posts/actions";
@@ -24,6 +22,7 @@ import { Label } from "../../ui/label";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
+import AddCodeBlock from "./AddCodeBlock";
 
 function PostForm({ post }: { post?: postValues | null }) {
   const { toast } = useToast();
@@ -36,24 +35,22 @@ function PostForm({ post }: { post?: postValues | null }) {
       title: post?.title,
       description: post?.description,
       slug: post?.slug,
-      codeblock: post?.codeblock || [{ content: "", language: "" }],
+      codeblock: post?.codeblock,
       tech: post?.tech || [],
     },
   });
-
-  const codeBlock = form.watch("codeblock");
-
-  const handleAddCodeBlock = () => {
-    const currentCodeblock = codeBlock || [];
-    const newCodeblock = [...currentCodeblock, { content: "", language: "" }];
-    form.setValue("codeblock", newCodeblock);
-  };
 
   async function onSubmit(data: postValues) {
     const formData = new FormData();
 
     if (file) {
       formData.append("image", file);
+    } else if (!file && !post?.image) {
+      toast({
+        variant: "destructive",
+        description: `Upload image`,
+      });
+      return null;
     }
 
     try {
@@ -80,6 +77,11 @@ function PostForm({ post }: { post?: postValues | null }) {
     file && setfile(file);
   };
 
+  const codeBlockError = form.getFieldState("codeblock").error?.message;
+  const imageError = form.getFieldState("image").error?.message;
+  const codeBlock = form.watch("codeblock");
+
+  
   return (
     <>
       <div className="w-full">
@@ -104,15 +106,23 @@ function PostForm({ post }: { post?: postValues | null }) {
 
         <Label>Imgae</Label>
         <Input type="file" onChange={handleImageChange} />
+        {imageError && (
+          <span className="text-sm text-destructive">{imageError}</span>
+        )}
+      </div>
+
+      <div>
+        <AddCodeBlock Postform={form} />
+        {!codeBlock && codeBlockError && (
+          <span className="text-sm text-destructive">{codeBlockError}</span>
+        )}
       </div>
 
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 mt-10"
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <div className="flex flex-col gap-2 w-full">
-            {codeBlock &&
+            <>
+              {/* {codeBlock &&
               codeBlock.map((block, index) => (
                 <div key={index}>
                   <div className="w-full gap-2 flex">
@@ -145,7 +155,8 @@ function PostForm({ post }: { post?: postValues | null }) {
               onClick={handleAddCodeBlock}
             >
               Add
-            </Button>
+            </Button> */}
+            </>
           </div>
 
           <FormField
@@ -208,6 +219,7 @@ function PostForm({ post }: { post?: postValues | null }) {
                 <FormDescription>
                   Add technologies related to the project.
                 </FormDescription>
+                <FormMessage />
               </FormItem>
             )}
           />

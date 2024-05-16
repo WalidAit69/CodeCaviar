@@ -7,9 +7,9 @@ async function page({ params: { id } }: { params: { id: string } }) {
     where: { id },
     include: { codeblock: true },
   });
-  
+
   return (
-    <section>
+    <section className="pb-[70px]">
       <h1 className="text-4xl font-[900] mb-10">Edit Post</h1>
       <PostForm post={post} />
     </section>

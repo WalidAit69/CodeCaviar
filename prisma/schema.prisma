@@ -85,9 +85,11 @@ model Post {
 }
 
 model CodeBlock {
-  id       String  @id @default(cuid())
-  content  String
-  language String
-  Post     Post?   @relation(fields: [postId], references: [id], onDelete: Cascade)
-  postId   String?
+  id         String  @id @default(cuid())
+  content    String
+  language   String
+  title      String?
+  decription String?
+  Post       Post?   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId     String?
 }

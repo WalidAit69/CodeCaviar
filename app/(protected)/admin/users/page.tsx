@@ -41,7 +41,7 @@ async function page() {
                 height={50}
               />
               <div className="min-w-0 flex-auto">
-                <p className="text-base font-semibold leading-6 text-gray-900 flex items-center gap-1">
+                <p className="text-base font-semibold leading-6 flex items-center gap-1">
                   {user.name}
                   {user.emailVerified && (
                     <TooltipProvider>
@@ -64,7 +64,7 @@ async function page() {
 
             <div className="flex items-center gap-5">
               <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                <p className="text-sm leading-6 text-gray-900 flex items-center gap-2">
+                <p className="text-sm leading-6 flex items-center gap-2">
                   {user.role || "user"}
                   {user.headadmin && <Lock size={13} />}
                 </p>

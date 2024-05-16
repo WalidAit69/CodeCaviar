@@ -10,9 +10,8 @@ function NavLink(props: Omit<ComponentProps<typeof Link>, "className">) {
     <Link
       {...props}
       className={cn(
-        "antialiased font-[700] text-base transition-colors bg-black dark:bg-white duration-300 hover:bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent",
-        pathname === props.href &&
-          "bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent"
+        "antialiased font-bold text-base transition-colors duration-300 hover:text-[#ab23ff]",
+        pathname === props.href && "text-[#ab23ff] font-bold"
       )}
     ></Link>
   );

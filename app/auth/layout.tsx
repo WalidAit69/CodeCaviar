@@ -12,16 +12,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="h-[100vh] pt-[70px] relative">
+    <main className="h-[100vh] pt-[70px] relative menu-blur">
       <div className="absolute inset-0 backdrop-filter backdrop-blur-md backdrop-brightness-25 brightness-95 z-[1]"></div>
 
       {children}
 
       <div>
         <Image
-          src="https://ucarecdn.com/81eca962-2f3d-4052-9d93-f57b9a4752c5/"
-          width={400}
-          height={400}
+          src="https://ucarecdn.com/2e6b0f05-dbd0-4c0b-9862-f6a5246662c8/"
+          width={300}
+          height={300}
           alt=""
           className="absolute bottom-0 left-0 select-none"
         />

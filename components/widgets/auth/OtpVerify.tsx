@@ -65,12 +65,12 @@ function OtpVerify({ email }: { email: string }) {
               <FormControl>
                 <InputOTP maxLength={6} {...field}>
                   <InputOTPGroup>
-                    <InputOTPSlot className="w-14 h-14" index={0} />
-                    <InputOTPSlot className="w-14 h-14" index={1} />
-                    <InputOTPSlot className="w-14 h-14" index={2} />
-                    <InputOTPSlot className="w-14 h-14" index={3} />
-                    <InputOTPSlot className="w-14 h-14" index={4} />
-                    <InputOTPSlot className="w-14 h-14" index={5} />
+                    <InputOTPSlot className="sm:w-14 sm:h-14" index={0} />
+                    <InputOTPSlot className="sm:w-14 sm:h-14" index={1} />
+                    <InputOTPSlot className="sm:w-14 sm:h-14" index={2} />
+                    <InputOTPSlot className="sm:w-14 sm:h-14" index={3} />
+                    <InputOTPSlot className="sm:w-14 sm:h-14" index={4} />
+                    <InputOTPSlot className="sm:w-14 sm:h-14" index={5} />
                   </InputOTPGroup>
                 </InputOTP>
               </FormControl>
