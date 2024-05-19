@@ -23,7 +23,7 @@ export default function NavBar() {
   const isAdminPage = pathname.startsWith("/admin");
 
   const { MenuOpen } = useMenu();
-
+  
   return (
     <>
       <header
