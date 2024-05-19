@@ -11,7 +11,7 @@ function MenuBtn() {
       <Button
         variant="outline"
         className={cn(
-          "relative sm:w-10 sm:h-10 w-10  h-10 rounded-md transform transition-all duration-300 hover:bg-[#a8a8e7]",
+          "relative sm:w-10 sm:h-10 w-10  h-10 rounded-md transform transition-all duration-300",
           {
             "bg-[#422caf]": MenuOpen,
             "bg-transparent": !MenuOpen,

@@ -7,6 +7,7 @@ import useScreenWidth from "@/hooks/useScreenWidth";
 import NavLink from "./NavLink";
 import { useMenu } from "@/store/store";
 
+
 interface Props {
   isAdminPage: boolean;
 }
@@ -25,18 +26,16 @@ function Menu({ isAdminPage }: Props) {
       ".menu-blur"
     ) as NodeListOf<HTMLElement>;
 
-    if (elements) {
-      if (MenuOpen) {
-        document.body.style.overflow = "hidden";
-        elements.forEach((element) => {
-          element.style.filter = "blur(4px)";
-        });
-      } else {
-        document.body.style.overflow = "auto";
-        elements.forEach((element) => {
-          element.style.filter = "none";
-        });
-      }
+    if (MenuOpen) {
+      document.body.style.overflow = "hidden";
+      elements.forEach((element) => {
+        element.style.filter = "blur(4px)";
+      });
+    } else {
+      document.body.style.overflow = "auto";
+      elements.forEach((element) => {
+        element.style.filter = "none";
+      });
     }
   }, [screenWidth, MenuOpen]);
 
@@ -48,7 +47,7 @@ function Menu({ isAdminPage }: Props) {
         transition={{ duration: 0.3, ease: "easeIn" }}
         className="xl:hidden fixed top-0 right-0 h-[100vh] z-[101] w-full sm:w-[260px] overflow-y-auto"
       >
-        <div className="absolute right-0 flex flex-col justify-between px-10 md:w-[270px] sm:w-[260px] h-full w-full bg-black">
+        <div className="absolute right-0 flex flex-col justify-between px-10 md:w-[270px] sm:w-[260px] h-full w-full bg-black overflow-y-auto">
           <ul className="flex flex-col text-white mt-32 gap-10 font-bold text-[1.05rem]">
             {!isAdminPage &&
               NavLinks.map((navlink, index) => (
@@ -83,7 +82,7 @@ function Menu({ isAdminPage }: Props) {
               ))}
           </ul>
 
-          <div className="flex items-center gap-2 mb-10">
+          <div className="flex items-center gap-2 my-10">
             <a
               href="#"
               className="border-[2px] border-white rounded-full p-[.4rem] hover:bg-[#4285F4] hover:border-[#4285F4] transition-all duration-300"

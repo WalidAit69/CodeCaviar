@@ -1,7 +1,7 @@
 import React from "react";
 import MarqueeDemo from "./MarqueDemo";
 import { BorderBeam } from "../widgets/landingPage/border-beam";
-import {  MoveDown } from "lucide-react";
+import { MoveDown } from "lucide-react";
 import RevealFromBottom from "../widgets/landingPage/TextReveal";
 import AnimatedImage from "../widgets/landingPage/AnimatedImage";
 import ShinyBtn from "../widgets/landingPage/Shiny-Btn";
@@ -9,7 +9,7 @@ import ShinyBtn from "../widgets/landingPage/Shiny-Btn";
 
 function FirstSection() {
   return (
-    <section className="z-10 w-full h-[95%] mx-auto my-auto relative rounded-3xl overflow-hidden">
+    <section className="z-10 w-full h-[95vh] mx-auto my-auto relative rounded-3xl overflow-hidden">
       <div className="z-[-1] backdrop-blur-[2px] absolute top-0 bg-gradient-to-b from-transparent h-full to-indigo-900 w-full mx-auto rounded-3xl"></div>
 
       <ShinyBtn
@@ -19,7 +19,7 @@ function FirstSection() {
         className="z-10 cursor-pointer absolute top-[15%] sm:right-10 right-5 group rounded-full border border-black/5 bg-neutral-100 text-base text-white transition-all ease-in hover:cursor-pointer hover:bg-neutral-200 dark:border-white/5 dark:bg-neutral-900 dark:hover:bg-neutral-800"
       />
 
-      <div className="sm:px-10 px-5 xl:max-w-[80%] opacity-80 w-full font-Monument font-bold z-10 text-[5.5vw] sm:text-[5.3vw] md:text-[4.5vw] 2xl:text-[5rem] h-full flex flex-col justify-center gap-3">
+      <div className="sm:px-10 px-5 xl:max-w-[80%] opacity-80 w-full font-Monument font-bold z-10 text-[5.5vw] sm:text-[5.3vw] md:text-[4.5vw] 2xl:text-[5rem] short h-full flex flex-col justify-center gap-3">
         <RevealFromBottom text={"Web & Mobile Dev"} delay={0.1} />
         <RevealFromBottom text={"Snippets, Templates"} delay={0.3} />
         <RevealFromBottom text={"and Designs"} delay={0.5} />

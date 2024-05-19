@@ -54,9 +54,6 @@
 
 }
 
-
-
-
 @layer base {
   * {
     @apply border-border;
@@ -79,5 +76,3 @@
   font-family: 'Monument';
   src: url('../public/fonts/MonumentExtended-Regular.woff2') format('woff2'),
 }
-
-

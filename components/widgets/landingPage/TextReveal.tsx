@@ -32,12 +32,12 @@ const RevealFromBottom = ({
       className={cn(`overflow-hidden relative`, className)}
       style={{ height: textHeight }}
       initial={{ y: 100 }}
-      whileInView={{ y: 0 }}
+      animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: [0.25, 1, 0.3, 1], delay: delay }}
     >
       <motion.span
         initial={{ top: "100%" }}
-        whileInView={{ top: "0%" }}
+        animate={{ top: "0%" }}
         transition={{ duration: 0.3, ease: [0.25, 1, 0.3, 1], delay: delay }}
         ref={containerRef}
         className="absolute"
