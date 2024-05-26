@@ -1,7 +1,6 @@
 import { z } from "zod";
 
 // Post Form Validation
-
 export const codeBlockSchema = z.object({
   content: z.string().min(1, {
     message: "Add Code",

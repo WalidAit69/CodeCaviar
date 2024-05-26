@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+import { IconTrendingUp3 } from '@tabler/icons-react';
 
 export const BentoGrid = ({
   className,
@@ -28,6 +29,7 @@ export const BentoGridItem = ({
   header,
   icon,
   link,
+  soon,
 }: {
   className?: string;
   title?: string | React.ReactNode;
@@ -35,6 +37,7 @@ export const BentoGridItem = ({
   description?: string | React.ReactNode;
   header: string;
   icon?: React.ReactNode;
+  soon?: boolean;
 }) => {
   return (
     <div
@@ -43,14 +46,24 @@ export const BentoGridItem = ({
         className
       )}
     >
-      <Link href={link} className="w-full h-full">
+      <Link href={link} className="w-full h-full relative">
         <Image
           src={header}
-          alt=""
+          alt="banner"
           width={1000}
           height={200}
           className="w-full h-full object-cover"
         />
+
+        {soon ? (
+          <span className="capitalize absolute top-2 right-2 bg-gray-300 font-bold text-[#ab23ff] rounded-full px-2">
+            Soon
+          </span>
+        ) : (
+          <span className="capitalize absolute top-2 right-2 bg-gray-300 font-bold text-[#ab23ff] rounded-full px-2">
+            <IconTrendingUp3 stroke={2} />
+          </span>
+        )}
       </Link>
 
       <div className="group-hover/bento:translate-x-2 transition duration-200">

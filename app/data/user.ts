@@ -12,7 +12,10 @@ export async function getUserByEmail(email: string) {
 
 export async function getUserById(id: string) {
   try {
-    const user = await prisma.user.findUnique({ where: { id } });
+    const user = await prisma.user.findUnique({
+      where: { id },
+      include: { accounts: { select: { provider: true } } },
+    });
 
     return user;
   } catch (error) {
