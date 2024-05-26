@@ -3,8 +3,8 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="bg-transparent rounded-lg shadow m-4 w-full max-w-[100rem] max-[1700px]:max-w-[90%] max-[500px]:max-w-[95%] mx-auto">
-      <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
+    <footer className="bg-transparent backdrop-blur-lg shadow-sm rounded-lg mt-4 w-full">
+      <div className="w-full max-w-[100rem] max-[1700px]:max-w-[90%] max-[500px]:max-w-[95%] mx-auto p-4 md:py-8">
         <div className="sm:flex sm:items-center sm:justify-between">
           <a
             href="/"
@@ -50,7 +50,7 @@ function Footer() {
 
         <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
 
-        <div className="flex justify-start sm:justify-center my-2 space-x-6">
+        <div className="flex justify-start sm:justify-center my-3 space-x-6">
           <a href="#" className="text-gray-400 hover:text-gray-500">
             <span className="sr-only">Facebook</span>
             <svg

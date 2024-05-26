@@ -29,7 +29,7 @@ export default auth((req) => {
     return null;
   }
 
-  if (!isLoggedin && !isPublicRoute) {
+  if (!isLoggedin && nextUrl.pathname.startsWith("/settings")) {
     return Response.redirect(new URL(Default_Login_Redirect, nextUrl));
   }
 

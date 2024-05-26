@@ -4,7 +4,11 @@ import React from "react";
 async function page() {
   const session = await getSession();
 
-  return <div>{JSON.stringify(session?.user)}</div>;
+  return (
+    <div className="mt-[100px]">
+      
+    </div>
+  );
 }
 
 export default page;

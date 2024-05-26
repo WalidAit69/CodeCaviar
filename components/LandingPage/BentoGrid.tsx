@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils";
 import React from "react";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bentogrid";
 import {
@@ -19,41 +18,43 @@ export function BentoGridSecond() {
           header={item.header}
           className={item.className}
           icon={item.icon}
+          link={item.link}
         />
       ))}
     </BentoGrid>
   );
 }
-const Skeleton = () => (
-  <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl dark:bg-dot-white/[0.2] bg-dot-black/[0.2] [mask-image:radial-gradient(ellipse_at_center,white,transparent)]  border border-transparent dark:border-white/[0.2] bg-neutral-100 dark:bg-black"></div>
-);
+
 const items = [
   {
-    title: "The Dawn of Innovation",
-    description: "Explore the birth of groundbreaking ideas and inventions.",
-    header: <Skeleton />,
+    title: "Website Templates",
+    link: "/templates",
+    description: "Explore a variety of pre-designed website templates.",
+    header: "https://ucarecdn.com/b0e42bde-36e3-476d-af09-f6b6aa61001c/",
     className: "md:col-span-2",
-    icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
-  },
-  {
-    title: "The Digital Revolution",
-    description: "Dive into the transformative power of technology.",
-    header: <Skeleton />,
-    className: "md:col-span-1",
     icon: <IconFileBroken className="h-4 w-4 text-neutral-500" />,
   },
   {
-    title: "The Art of Design",
-    description: "Discover the beauty of thoughtful and functional design.",
-    header: <Skeleton />,
+    title: "Designs",
+    link: "/designs",
+    description: "Discover creative and functional design solutions.",
+    header: "https://ucarecdn.com/e88c164e-e33c-48b9-bbb5-301ff085b017/",
+    className: "md:col-span-1",
+    icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
+  },
+  {
+    title: "Snippets",
+    link: "/snippets",
+    description: "Find useful code snippets for various functionalities.",
+    header: "https://ucarecdn.com/d13502f5-bd25-43d1-b22c-945ba7dab723/",
     className: "md:col-span-1",
     icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
   },
   {
-    title: "The Power of Communication",
-    description:
-      "Understand the impact of effective communication in our lives.",
-    header: <Skeleton />,
+    title: "Fullstack Projects",
+    link: "/projects",
+    description: "Get inspired by complete fullstack project examples.",
+    header: "https://ucarecdn.com/ba8036d6-a535-4af0-93b8-ba3b392efc45/",
     className: "md:col-span-2",
     icon: <IconTableColumn className="h-4 w-4 text-neutral-500" />,
   },

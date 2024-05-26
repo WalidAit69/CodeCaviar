@@ -12,7 +12,7 @@ export const codeBlockSchema = z.object({
   title: z.string().min(1, {
     message: "Add title",
   }),
-  decription: z.string().min(1, {
+  description: z.string().min(1, {
     message: "Add description",
   }),
 });
@@ -35,6 +35,7 @@ export const postSchema = z.object({
   codeblock: z.array(codeBlockSchema),
   image: z.string().optional(),
   id: z.string().optional(),
+  showimg: z.boolean().optional(),
 });
 
 export type postValues = z.infer<typeof postSchema>;

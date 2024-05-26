@@ -24,7 +24,6 @@ const RevealFromBottom = ({
       setTextHeight(containerRef.current.offsetHeight);
     }
 
-    console.log(textHeight);
   }, [text, ScreenWidth]);
 
   return (

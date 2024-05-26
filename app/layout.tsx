@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   description: "Coding Platform",
 };
 
+
 export default function RootLayout({
   children,
 }: Readonly<{

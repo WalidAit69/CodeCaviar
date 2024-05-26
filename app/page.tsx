@@ -7,7 +7,7 @@ import { MoveDown } from "lucide-react";
 export default function Home() {
   return (
     <main className="menu-blur flex flex-col items-center justify-center">
-      <div className="flex flex-col gap-28 w-full max-w-[100rem] max-[1700px]:max-w-[90%] max-[500px]:max-w-[95%] h-full">
+      <div className="flex flex-col lg:gap-20 gap-10 w-full max-w-[100rem] max-[1700px]:max-w-[90%] max-[500px]:max-w-[95%] h-full">
         <FirstSection />
 
         <BentoGridSecond />

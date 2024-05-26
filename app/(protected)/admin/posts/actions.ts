@@ -106,7 +106,7 @@ export async function AddPost(data: postValues, formData: FormData) {
           create: codeblocksData.map((block: codeBlockValues) => ({
             content: block.content,
             language: block.language,
-            decription: block.decription,
+            description: block.description,
             title: block.title,
           })),
         },
@@ -170,7 +170,7 @@ export async function UpdatePost(
           create: codeblocksData.map((block: codeBlockValues) => ({
             content: block.content,
             language: block.language,
-            decription: block.decription,
+            description: block.description,
             title: block.title,
           })),
         },

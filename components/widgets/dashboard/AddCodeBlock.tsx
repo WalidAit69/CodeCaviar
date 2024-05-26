@@ -24,6 +24,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Trash } from "lucide-react";
+import CodeExecutor from "@/components/LiveCode";
 
 interface Props {
   Postform: any;
@@ -36,7 +37,7 @@ function AddCodeBlock({ Postform }: Props) {
       content: "",
       language: "",
       title: "",
-      decription: "",
+      description: "",
     },
   });
 
@@ -56,7 +57,7 @@ function AddCodeBlock({ Postform }: Props) {
   };
 
   return (
-    <div className="mt-12">
+    <div className="my-12">
       <Dialog>
         <DialogTrigger asChild className="w-full">
           <Button className="w-full sm:w-[300px]">Add Code Block</Button>
@@ -91,7 +92,7 @@ function AddCodeBlock({ Postform }: Props) {
 
                 <FormField
                   control={form.control}
-                  name="decription"
+                  name="description"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Description</FormLabel>
@@ -149,8 +150,10 @@ function AddCodeBlock({ Postform }: Props) {
       {codeBlock &&
         codeBlock.map(
           (code: { content: string; language: string }, index: number) => (
-            <div key={index} className="relative">
-              <CodeBlock codeString={code.content} language={code.language} />
+            <div key={index} className="relative mt-3">
+              {/* <CodeBlock codeString={code.content} language={code.language} /> */}
+              <CodeExecutor code={code.content} editor/>
+
 
               <Button
                 onClick={() => {
