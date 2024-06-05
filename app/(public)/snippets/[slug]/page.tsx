@@ -1,13 +1,37 @@
 import Snippet from "@/components/snippets/Snippet";
 import React from "react";
-import { Metadata } from "next";
 
+interface Metadata {
+  title: string;
+  description: string;
+}
 
-export const metadata: Metadata = {
-  title: "Code Caviar Snippets",
-  description: "Coding Platform",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const { slug } = params;
 
+  const response = await fetch(
+    `http://localhost:3000/api/post/metadata?slug=${slug}`
+  );
+  const data = await response.json();
+  
+  const metadata: Metadata = {
+    title: data.title,
+    description: data.description,
+  };
+
+  return {
+    title: metadata.title,
+    description: metadata.description,
+    openGraph: {
+      title: metadata.title,
+      description: metadata.description,
+    },
+  };
+}
 
 function page() {
   return (

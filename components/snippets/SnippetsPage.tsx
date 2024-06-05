@@ -12,6 +12,9 @@ import {
 import { Button } from "../ui/button";
 import SearchInput from "./Search-Input";
 
+
+const placeholders = ["Responsive Menu","Button","Input","Carousel","Side bar"];
+
 interface CodeBlock {
   content: string;
 }
@@ -64,7 +67,7 @@ function SnippetsPage({ snippets }: { snippets: Snippet[] }) {
 
   return (
     <div>
-      <SearchInput setSearch={setSearch} />
+      <SearchInput setSearch={setSearch} placeholders={placeholders}/>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 sm:gap-10 gap-5 max-w-full my-20 mx-1">
         {currentPosts &&

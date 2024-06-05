@@ -1,54 +1,53 @@
 import prisma from "@/lib/prisma";
 
-export async function getPostBySlugMeta(slug: string) {
+export async function getTemplateBySlugMeta(slug: string) {
   try {
-    const post = await prisma.post.findUnique({
+    const Template = await prisma.template.findUnique({
       where: { slug },
       select: { title: true, description: true },
     });
 
-    return post;
+    return Template;
   } catch (error) {
     throw error;
   }
 }
 
-export async function getPostBySlug(slug: string) {
+export async function getTemplateBySlug(slug: string) {
   try {
-    const post = await prisma.post.findUnique({
+    const Template = await prisma.template.findUnique({
       where: { slug },
-      include: { codeblock: true },
     });
 
-    return post;
+    return Template;
   } catch (error) {
     throw error;
   }
 }
 
-export async function getPostById(id: string) {
+export async function getTemplateById(id: string) {
   try {
-    const post = await prisma.post.findUnique({ where: { id } });
+    const Template = await prisma.template.findUnique({ where: { id } });
 
-    return post;
+    return Template;
   } catch (error) {
     throw error;
   }
 }
 
-export async function getPosts() {
+export async function getTemplates() {
   try {
-    const posts = await prisma.post.findMany({
+    const Templates = await prisma.template.findMany({
       orderBy: { createdAt: "desc" },
     });
 
-    return posts;
+    return Templates;
   } catch (error) {
     throw error;
   }
 }
 
-export async function getActivePosts() {
+export async function getActiveTemplates() {
   try {
     const posts = await prisma.post.findMany({
       orderBy: { createdAt: "desc" },

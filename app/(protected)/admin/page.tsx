@@ -1,11 +1,14 @@
+import { getPosts } from "@/app/data/post";
+import { getTemplates } from "@/app/data/templates";
+import { getUsers } from "@/app/data/user";
 import DashboardCard from "@/components/widgets/dashboard/DashboardCard";
-import prisma from "@/lib/prisma";
 import React from "react";
 
 async function page() {
-  const [posts, users] = await Promise.all([
-    await prisma.post.findMany(),
-    await prisma.user.findMany(),
+  const [posts, users, templates] = await Promise.all([
+    await getPosts(),
+    await getUsers(),
+    await getTemplates(),
   ]);
 
   const categories = [
@@ -25,20 +28,20 @@ async function page() {
       title: "Templates",
       description: "number of templates",
       content: "",
-      footer: `${posts.length.toString()} posts`,
+      footer: `${templates.length.toString()} posts`,
     },
     {
       title: "Designs",
       description: "number of designs",
       content: "",
-      footer: `${posts.length.toString()} posts`,
+      footer: `0`,
       soon: true,
     },
     {
       title: "Projects",
       description: "number of projects",
       content: "",
-      footer: `${posts.length.toString()} posts`,
+      footer: `0`,
       soon: true,
     },
   ];

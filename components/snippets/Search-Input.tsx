@@ -1,19 +1,12 @@
 import React from "react";
 import { PlaceholdersAndVanishInput } from "../ui/SearchInput";
 
-const placeholders = [
-  "Responsive Menu",
-  "Button",
-  "Input",
-  "Carousel",
-  "Side bar",
-];
-
 interface Props {
   setSearch: React.Dispatch<React.SetStateAction<string>>;
+  placeholders: string[];
 }
 
-function SearchInput({ setSearch }: Props) {
+function SearchInput({ setSearch, placeholders }: Props) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };

@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+//////////////////////// POST FORM ////////////////////////////////
 // Post Form Validation
 export const codeBlockSchema = z.object({
   content: z.string().min(1, {
@@ -39,6 +40,7 @@ export const postSchema = z.object({
 
 export type postValues = z.infer<typeof postSchema>;
 
+//////////////////////// User FORM ////////////////////////////////
 // User Form
 // Sign in Form
 export const signInShema = z.object({
@@ -95,3 +97,26 @@ export const ResetPassShema = z
   });
 
 export type ResetPassShemaValues = z.infer<typeof ResetPassShema>;
+
+////////////////////// Templates From ////////////////////////////
+export const templateSchema = z.object({
+  title: z.string().min(5, {
+    message: "Username must be at least 5 characters.",
+  }),
+  slug: z.string().min(5, {
+    message: "Username must be at least 5 characters.",
+  }),
+  description: z.string().min(10, {
+    message: "Description must be at least 10 characters.",
+  }),
+  link: z.string().min(1, {
+    message: "Link to template must be provided.",
+  }),
+  types: z.array(z.string()).min(1, {
+    message: "Tech field must have at least one value.",
+  }),
+  images: z.array(z.string()).optional(),
+  id: z.string().optional(),
+});
+
+export type templateValues = z.infer<typeof templateSchema>;

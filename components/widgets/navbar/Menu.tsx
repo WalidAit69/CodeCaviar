@@ -132,7 +132,7 @@ function Menu({ isAdminPage }: Props) {
           display: MenuOpen ? "block" : "none",
         }}
         transition={{ duration: 0.3, ease: "easeIn" }}
-        className="bg-black w-full h-[100vh] absolute top-0 left-0 z-[2]"
+        className="bg-black w-full h-[100vh] fixed top-0 left-0 z-[2]"
         onClick={closeMenu}
       ></motion.div>
     </>
