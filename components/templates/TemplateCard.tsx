@@ -4,7 +4,20 @@ import { IconTrendingUp3 } from "@tabler/icons-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
-function TemplateCard({ sm }: { sm?: boolean }) {
+interface Template {
+  id: string;
+  title: string;
+  slug: string;
+  description: string;
+  types: string[];
+  images: string[];
+  link: string;
+  active: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+function TemplateCard({ sm, template }: { sm?: boolean; template: Template }) {
   return (
     <div>
       <div
@@ -29,17 +42,20 @@ function TemplateCard({ sm }: { sm?: boolean }) {
         </div>
 
         <div className="w-full h-full overflow-auto authmodal relative">
-          <Image
-            width={500}
-            height={400}
-            src="/screen.png"
-            alt="template-showcase"
-            className="w-full object-cover group-hover:brightness-50 transition-all duration-300 ease-in"
-          />
+          {template.images.map((img, index) => (
+            <Image
+              key={index}
+              width={500}
+              height={400}
+              src={img}
+              alt="template-showcase"
+              className="w-full object-cover group-hover:brightness-50 transition-all duration-300 ease-in"
+            />
+          ))}
         </div>
 
         <Link
-          href="/templates/ddd"
+          href={`/templates/${template.slug}`}
           className="w-16 h-7 opacity-0 group-hover:opacity-100 grid place-content-center transition-all duration-300 ease-in cursor-pointer absolute top-7 right-5 bg-gray-300 shadow-xl font-bold text-[#ab23ff] rounded-full"
         >
           <IconTrendingUp3
@@ -49,7 +65,9 @@ function TemplateCard({ sm }: { sm?: boolean }) {
         </Link>
       </div>
 
-      <span className="font-Monument mt-3 ml-1 text-xl block">title</span>
+      <span className="font-Monument mt-3 ml-1 text-xl block">
+        {template.title}
+      </span>
     </div>
   );
 }

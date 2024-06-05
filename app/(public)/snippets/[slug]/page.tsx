@@ -14,7 +14,7 @@ export async function generateMetadata({
   const { slug } = params;
 
   const response = await fetch(
-    `http://localhost:3000/api/post/metadata?slug=${slug}`
+    `http://localhost:3000/api/post/metadata/snippet?slug=${slug}`
   );
   const data = await response.json();
   

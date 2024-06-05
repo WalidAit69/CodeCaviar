@@ -1,3 +1,4 @@
+import { getTemplates } from "@/app/data/templates";
 import Footer from "@/components/Footer";
 
 import TemplatesPage from "@/components/templates/TemplatesPage";
@@ -9,7 +10,9 @@ export const metadata: Metadata = {
   description: "Coding Platform",
 };
 
-function page() {
+async function page() {
+  const templates = await getTemplates();
+
   return (
     <main className="menu-blur w-full flex flex-col items-center justify-center sm:pt-[150px] pt-[100px]">
       <section className="w-full max-w-[100rem] max-[1700px]:max-w-[90%] max-[500px]:max-w-[95%]">
@@ -23,7 +26,7 @@ function page() {
           </p>
         </div>
 
-        <TemplatesPage />
+        <TemplatesPage templates={templates} />
       </section>
 
       <Footer />

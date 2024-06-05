@@ -45,7 +45,7 @@ function Snippet() {
     const fetchPost = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/post/${slug}?slug=${slug}`
+          `http://localhost:3000/api/post/snippet/${slug}?slug=${slug}`
         );
         setSnippet(response.data);
       } catch (error) {

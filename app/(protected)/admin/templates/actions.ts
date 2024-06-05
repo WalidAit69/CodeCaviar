@@ -120,112 +120,112 @@ export async function AddTemplate(data: templateValues, formData: FormData) {
   }
 }
 
-export async function UpdatePost(
-  id: string,
-  data: postValues,
-  formData: FormData
-) {
-  try {
-    const role = await currentRole();
+// export async function UpdatePost(
+//   id: string,
+//   data: postValues,
+//   formData: FormData
+// ) {
+//   try {
+//     const role = await currentRole();
 
-    if (role !== "ADMIN") {
-      throw new Error("Unauthorized");
-    }
+//     if (role !== "ADMIN") {
+//       throw new Error("Unauthorized");
+//     }
 
-    const post = await getPostById(id);
+//     const post = await getPostById(id);
 
-    if (!post) {
-      throw new Error("Post not found");
-    }
+//     if (!post) {
+//       throw new Error("Post not found");
+//     }
 
-    // Check if the slug is being changed and if it's already used
-    if (data.slug !== post.slug) {
-      const postWithNewSlug = await getPostBySlug(data.slug);
+//     // Check if the slug is being changed and if it's already used
+//     if (data.slug !== post.slug) {
+//       const postWithNewSlug = await getPostBySlug(data.slug);
 
-      if (postWithNewSlug) {
-        throw new Error("Slug already used");
-      }
-    }
+//       if (postWithNewSlug) {
+//         throw new Error("Slug already used");
+//       }
+//     }
 
-    let image: string | undefined = post.image;
+//     let image: string | undefined = post.image;
 
-    if (formData.has("image")) {
-      image = await uploadToS3(formData);
-      if (!image) {
-        throw new Error("Image upload failed.");
-      }
+//     if (formData.has("image")) {
+//       image = await uploadToS3(formData);
+//       if (!image) {
+//         throw new Error("Image upload failed.");
+//       }
 
-      await DeleteImageFromS3(post.image);
-    }
+//       await DeleteImageFromS3(post.image);
+//     }
 
-    const codeblocksData = data.codeblock;
+//     const codeblocksData = data.codeblock;
 
-    await prisma.post.update({
-      where: { id },
-      data: {
-        ...data,
-        image,
-        codeblock: {
-          deleteMany: {},
-          create: codeblocksData.map((block: codeBlockValues) => ({
-            content: block.content,
-            language: block.language,
-            description: block.description,
-            title: block.title,
-          })),
-        },
-      },
-    });
+//     await prisma.post.update({
+//       where: { id },
+//       data: {
+//         ...data,
+//         image,
+//         codeblock: {
+//           deleteMany: {},
+//           create: codeblocksData.map((block: codeBlockValues) => ({
+//             content: block.content,
+//             language: block.language,
+//             description: block.description,
+//             title: block.title,
+//           })),
+//         },
+//       },
+//     });
 
-    redirect("/admin/posts");
-  } catch (error) {
-    console.error("Error updating post:", error);
-    throw error;
-  }
-}
+//     redirect("/admin/posts");
+//   } catch (error) {
+//     console.error("Error updating post:", error);
+//     throw error;
+//   }
+// }
 
-export async function DeletePost(id: string) {
-  try {
-    const role = await currentRole();
+// export async function DeletePost(id: string) {
+//   try {
+//     const role = await currentRole();
 
-    if (role !== "ADMIN") {
-      throw new Error("Unauthorized");
-    }
+//     if (role !== "ADMIN") {
+//       throw new Error("Unauthorized");
+//     }
 
-    const post = await getPostById(id);
+//     const post = await getPostById(id);
 
-    if (!post) {
-      throw new Error("Post not found");
-    }
+//     if (!post) {
+//       throw new Error("Post not found");
+//     }
 
-    await DeleteImageFromS3(post.image);
+//     await DeleteImageFromS3(post.image);
 
-    // Delete the post from the database
-    await prisma.post.delete({
-      where: { id },
-    });
-  } catch (error) {
-    console.log("Error deleting post");
-    throw error;
-  }
-}
+//     // Delete the post from the database
+//     await prisma.post.delete({
+//       where: { id },
+//     });
+//   } catch (error) {
+//     console.log("Error deleting post");
+//     throw error;
+//   }
+// }
 
-export async function ToggleStatus(id: string, status: boolean) {
-  try {
-    const role = await currentRole();
+// export async function ToggleStatus(id: string, status: boolean) {
+//   try {
+//     const role = await currentRole();
 
-    if (role !== "ADMIN") {
-      throw new Error("Unauthorized");
-    }
+//     if (role !== "ADMIN") {
+//       throw new Error("Unauthorized");
+//     }
 
-    await prisma.post.update({
-      where: { id },
-      data: { active: !status },
-    });
+//     await prisma.post.update({
+//       where: { id },
+//       data: { active: !status },
+//     });
 
-    console.log("updated");
-  } catch (error) {
-    console.log("Error updating post");
-    throw error;
-  }
-}
+//     console.log("updated");
+//   } catch (error) {
+//     console.log("Error updating post");
+//     throw error;
+//   }
+// }

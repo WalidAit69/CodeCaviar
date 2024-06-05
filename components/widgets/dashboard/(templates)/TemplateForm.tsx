@@ -21,6 +21,7 @@ import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { AddTemplate } from "@/app/(protected)/admin/templates/actions";
 
 function TemplateForm({ template }: { template?: templateValues | null }) {
   const { toast } = useToast();
@@ -46,7 +47,6 @@ function TemplateForm({ template }: { template?: templateValues | null }) {
         formData.append("images", file);
       });
 
-      console.log(formData.getAll("images"));
     } else if (!files && !template?.images) {
       toast({
         variant: "destructive",
@@ -55,23 +55,23 @@ function TemplateForm({ template }: { template?: templateValues | null }) {
       return null;
     }
 
-    // try {
-    //   setloading(true);
-    //   if (post && post.id) {
-    //     await UpdatePost(post.id, data, formData);
-    //     toast({ description: "Post Updated." });
-    //   } else {
-    //     await AddPost(data, formData);
-    //     toast({ description: "Post added." });
-    //   }
-    // } catch (error: any) {
-    //   toast({
-    //     variant: "destructive",
-    //     description: `${error.message}`,
-    //   });
-    // } finally {
-    //   setloading(false);
-    // }
+    try {
+      setloading(true);
+      if (template && template.id) {
+        // await UpdatePost(template.id, data, formData);
+        toast({ description: "Post Updated." });
+      } else {
+        await AddTemplate(data, formData);
+        toast({ description: "Post added." });
+      }
+    } catch (error: any) {
+      toast({
+        variant: "destructive",
+        description: `${error.message}`,
+      });
+    } finally {
+      setloading(false);
+    }
   }
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
